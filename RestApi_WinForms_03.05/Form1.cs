@@ -33,7 +33,7 @@ namespace RestApi_WinForms_03._05
                 listBox_Adatok.Items.Add(item.Name);
             }*/
             listBox_Adatok.Items.AddRange(adatok.ToArray());
-            list.Items.add(new ListBoxItem("name", "value"));
+            //list.Items.add(new ListBoxItem("name", "value"));
         }
          async Task restapiAdatok()
         {
