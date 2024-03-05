@@ -40,10 +40,6 @@ namespace RestApi_WinForms_03._05
             var client = new HttpClient();
             var request = new HttpRequestMessage(HttpMethod.Get, endPointUrl);
             var response = await client.SendAsync(request);
-            if ()
-            {
-
-            }
             response.EnsureSuccessStatusCode();
             // Console.WriteLine(await response.Content.ReadAsStringAsync());
             string jsonString = await response.Content.ReadAsStringAsync();
