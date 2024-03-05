@@ -27,14 +27,23 @@ namespace RestApi_WinForms_03._05
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            restapiAdatok();
-
+            restapiAdatok().Wait();
+            /*foreach (Adat item in adatok)
+            {
+                listBox_Adatok.Items.Add(item.Name);
+            }*/
+            listBox_Adatok.Items.AddRange(adatok.ToArray());
+            list.Items.add(new ListBoxItem("name", "value"));
         }
          async Task restapiAdatok()
         {
             var client = new HttpClient();
             var request = new HttpRequestMessage(HttpMethod.Get, endPointUrl);
             var response = await client.SendAsync(request);
+            if ()
+            {
+
+            }
             response.EnsureSuccessStatusCode();
             // Console.WriteLine(await response.Content.ReadAsStringAsync());
             string jsonString = await response.Content.ReadAsStringAsync();

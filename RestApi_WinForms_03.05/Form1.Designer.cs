@@ -29,13 +29,23 @@ namespace RestApi_WinForms_03._05
         /// </summary>
         private void InitializeComponent()
         {
+            this.listBox_Adatok = new System.Windows.Forms.ListBox();
             this.SuspendLayout();
+            // 
+            // listBox_Adatok
+            // 
+            this.listBox_Adatok.FormattingEnabled = true;
+            this.listBox_Adatok.Location = new System.Drawing.Point(60, 55);
+            this.listBox_Adatok.Name = "listBox_Adatok";
+            this.listBox_Adatok.Size = new System.Drawing.Size(250, 355);
+            this.listBox_Adatok.TabIndex = 0;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.listBox_Adatok);
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -44,6 +54,8 @@ namespace RestApi_WinForms_03._05
         }
 
         #endregion
+
+        private System.Windows.Forms.ListBox listBox_Adatok;
     }
 }
 
