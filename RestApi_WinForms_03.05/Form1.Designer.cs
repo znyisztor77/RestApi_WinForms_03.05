@@ -48,6 +48,7 @@ namespace RestApi_WinForms_03._05
             this.listBox_Adatok.Name = "listBox_Adatok";
             this.listBox_Adatok.Size = new System.Drawing.Size(250, 355);
             this.listBox_Adatok.TabIndex = 0;
+            this.listBox_Adatok.SelectedIndexChanged += new System.EventHandler(this.listBox_Adatok_SelectedIndexChanged);
             // 
             // label1
             // 
@@ -106,6 +107,7 @@ namespace RestApi_WinForms_03._05
             this.button_beszuras.TabIndex = 7;
             this.button_beszuras.Text = "Beszúrás";
             this.button_beszuras.UseVisualStyleBackColor = true;
+            this.button_beszuras.Click += new System.EventHandler(this.button_beszuras_Click);
             // 
             // button_modositas
             // 

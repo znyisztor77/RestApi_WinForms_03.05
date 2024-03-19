@@ -16,6 +16,21 @@ namespace RestApi_WinForms_03._05
 
     public partial class Dolgozo
     {
+        [JsonConstructor]
+        public Dolgozo(long id, string name, long salary)
+        {
+            Id = id;
+            Name = name;
+            Salary = salary;
+        }
+
+        public Dolgozo(string name, long salary)
+        {
+            Id = -1;
+            Name = name;
+            Salary = salary;
+        }
+
         [JsonProperty("id")]
         public long Id { get; set; }
 
@@ -38,6 +53,7 @@ namespace RestApi_WinForms_03._05
     public static class Serialize
     {
         public static string ToJson(this List<Dolgozo> self) => JsonConvert.SerializeObject(self, RestApi_WinForms_03._05.Converter.Settings);
+        
     }
 
     internal static class Converter
