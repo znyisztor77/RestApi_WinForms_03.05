@@ -19,7 +19,7 @@ namespace RestApi_WinForms_03._05
            "salary": 30903
         */
 
-        static List<Adat> adatok = new List<Adat>();
+        static List<Dolgozo> adatok = new List<Dolgozo>();
         public Form1()
         {
             InitializeComponent();
@@ -27,23 +27,22 @@ namespace RestApi_WinForms_03._05
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            restapiAdatok().Wait();
-            /*foreach (Adat item in adatok)
-            {
-                listBox_Adatok.Items.Add(item.Name);
-            }*/
+           
+            restapiAdatok();
             listBox_Adatok.Items.AddRange(adatok.ToArray());
-            //list.Items.add(new ListBoxItem("name", "value"));
         }
-         async Task restapiAdatok()
+         async void restapiAdatok()
         {
             var client = new HttpClient();
             var request = new HttpRequestMessage(HttpMethod.Get, endPointUrl);
             var response = await client.SendAsync(request);
-            response.EnsureSuccessStatusCode();
-            // Console.WriteLine(await response.Content.ReadAsStringAsync());
-            string jsonString = await response.Content.ReadAsStringAsync();
-            adatok = Adat.FromJson(jsonString).ToList();
+            //response.EnsureSuccessStatusCode();
+            if (response.IsSuccessStatusCode)
+            {
+                string jsonString = await response.Content.ReadAsStringAsync();
+                adatok = Dolgozo.FromJson(jsonString);
+                listBox_Adatok.Items.AddRange(adatok.ToArray());
+            }
 
         }
     }
