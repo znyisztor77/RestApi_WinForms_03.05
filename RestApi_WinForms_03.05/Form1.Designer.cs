@@ -126,6 +126,7 @@ namespace RestApi_WinForms_03._05
             this.button_torles.TabIndex = 9;
             this.button_torles.Text = "Törlés";
             this.button_torles.UseVisualStyleBackColor = true;
+            this.button_torles.Click += new System.EventHandler(this.button_torles_Click);
             // 
             // Form1
             // 

@@ -24,12 +24,16 @@ namespace RestApi_WinForms_03._05
             Salary = salary;
         }
 
-        public Dolgozo(string name, long salary)
+        public Dolgozo()
+        {
+        }
+
+        /*public Dolgozo(string name, long salary)
         {
             Id = -1;
             Name = name;
             Salary = salary;
-        }
+        }*/
 
         [JsonProperty("id")]
         public long Id { get; set; }

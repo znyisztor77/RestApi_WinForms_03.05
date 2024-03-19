@@ -43,13 +43,13 @@ namespace RestApi_WinForms_03._05
 
         private void Form1_Load(object sender, EventArgs e)
         {
-           
+
             restapiAdatok();
             listBox_Adatok.Items.AddRange(adatok.ToArray());
         }
-         async void restapiAdatok()
+        async void restapiAdatok()
         {
-            
+
             var request = new HttpRequestMessage(HttpMethod.Get, endPointUrl);
             var response = await client.SendAsync(request);
             //response.EnsureSuccessStatusCode();
@@ -73,7 +73,7 @@ namespace RestApi_WinForms_03._05
                 return;
             }
             long fizetes;
-            if(!long.TryParse(textBoxFizetes.Text,out fizetes))
+            if (!long.TryParse(textBoxFizetes.Text, out fizetes))
             {
                 MessageBox.Show("Nem megfelelő fizetés értéke!");
                 textBoxFizetes.Focus();
@@ -81,8 +81,11 @@ namespace RestApi_WinForms_03._05
             }
 
             //-- JSON hozunk létre
-            Dolgozo dolgozo = new Dolgozo(adatok[adatok.Count-1].Id+1, textBox_Nev.Text, fizetes);
-            string JsonDolgozo = JsonConvert.SerializeObject(dolgozo);           
+            //Dolgozo dolgozo = new Dolgozo(adatok[adatok.Count-1].Id+1, textBox_Nev.Text, fizetes); # Ádám megoldása
+            Dolgozo dolgozo = new Dolgozo();
+            dolgozo.Name = textBox_Nev.Text;
+            dolgozo.Salary = fizetes;
+            string JsonDolgozo = JsonConvert.SerializeObject(dolgozo);
             //-- JSONStringet csinálunk
             var data = new StringContent(JsonDolgozo, Encoding.UTF8, "application/json");
             var response = client.PostAsync(endPointUrl, data).Result;
@@ -103,10 +106,44 @@ namespace RestApi_WinForms_03._05
 
         private void listBox_Adatok_SelectedIndexChanged(object sender, EventArgs e)
         {
+            /*Dolgozo dolgozo = (Dolgozo)listBox_Adatok.SelectedItem;
+            textBox_azonosito.Text = dolgozo.Id.ToString();
+            textBox_Nev.Text = dolgozo.Name;
+            textBoxFizetes.Text = dolgozo.Salary.ToString(); # Ádám megoldása */
+            if (listBox_Adatok.SelectedIndex < 0)
+            {
+                return;
+            }
             Dolgozo dolgozo = (Dolgozo)listBox_Adatok.SelectedItem;
             textBox_azonosito.Text = dolgozo.Id.ToString();
             textBox_Nev.Text = dolgozo.Name;
             textBoxFizetes.Text = dolgozo.Salary.ToString();
+
+        }
+
+        private void button_torles_Click(object sender, EventArgs e)
+        {
+            if (listBox_Adatok.SelectedIndex < 0)
+            {
+                MessageBox.Show("Nincs kiválasztott adat!");
+                return;
+            }
+            Dolgozo dolgozo = (Dolgozo)listBox_Adatok.SelectedItem;
+            string deletUrl = $"{endPointUrl}/{dolgozo.Id}";
+            var response = client.DeleteAsync(deletUrl).Result;
+            if (response.IsSuccessStatusCode)
+            {
+                MessageBox.Show("Sikeres törlés!");
+                textBoxFizetes.Text = "";
+                textBox_Nev.Text = "";
+                
+            }
+            else
+            {
+                MessageBox.Show("Sikertelen törlés!");
+            }
+            restapiAdatok();
         }
     }
+
 }
